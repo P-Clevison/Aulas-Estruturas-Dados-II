@@ -47,7 +47,7 @@ int main() {
 			if (p !=NULL)
 			{
 				scanf("%f", &pvenda);
-				p, pvenda, novo_pvenda = Alterar_pvenda(p, pvenda);
+				Alterar_pvenda(p, pvenda);
 				printf("O preço de venda foi atualizado de : %f", pvenda);
 				printf(" para : %f", novo_pvenda);
 			}
