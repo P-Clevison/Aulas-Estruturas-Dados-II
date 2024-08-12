@@ -13,16 +13,15 @@ struct mercadoria {
 // Cadastra uma nova mercadoria baseado nos dados recebidos
 Mercadoria* Nova_mercadoria(int cod_prod, char nome_prod, char tipo_prod, char fabric, char categ, float pcusto)
 {
-    Mercadoria mc;
     printf("\n\n***** Cadastro de Mercadorias *****\n");
     Mercadoria* p1 = (Mercadoria*) malloc(sizeof(Mercadoria));
-    mc.cod_produto = cod_prod;
-    mc.nome_produto = nome_prod;
-    mc.tipo_produto = tipo_prod;
-    mc.fabricante = fabric;
-    mc.categoria = categ;
-    mc.preco_custo = pcusto;
-    mc.preco_venda = 0.0;
+    p1->cod_produto = cod_prod;
+    p1->nome_produto = nome_prod;
+    p1->tipo_produto = tipo_prod;
+    p1->fabricante = fabric;
+    p1->categoria = categ;
+    p1->preco_custo = pcusto;
+    p1->preco_venda = 0.0;
 
     return p1;
 }
@@ -31,7 +30,6 @@ Mercadoria* Nova_mercadoria(int cod_prod, char nome_prod, char tipo_prod, char f
 // Caalcula o preço de venda de um produto
 float Calcular_pvenda(Mercadoria *mc)
 {
-   printf("Preco de custo é: %f", mc->preco_venda);
    mc->preco_venda = mc->preco_custo * 2;
 
    return mc->preco_venda;
@@ -39,10 +37,10 @@ float Calcular_pvenda(Mercadoria *mc)
 
 
 // Altera o preço de venda de um produto
-float Alterar_pvenda(Mercadoria *mc, float novo_preco)
+void Alterar_pvenda(Mercadoria *mc, float novo_preco)
 {
    float preco_antigo = mc->preco_venda;
    mc->preco_venda = novo_preco;
+   printf("Preco foi atualizado de: %f para %f", preco_antigo, mc->preco_venda);
 
-   return *mc, preco_antigo, mc->preco_venda;
 }
