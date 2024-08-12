@@ -4,8 +4,8 @@
 int main() {
 	int oper = 0;
 	int cod_produto;
-    char nome_produto, tipo_produto, fabricante, categoria;
-    float pcusto, pvenda, novo_pvenda;
+	char nome_produto, tipo_produto, fabricante, categoria;
+	float pcusto, pvenda, novo_pvenda;
 	Mercadoria *p;
 
 	while (oper == 0)
