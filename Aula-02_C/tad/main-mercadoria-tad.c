@@ -48,8 +48,6 @@ int main() {
 			{
 				scanf("%f", &pvenda);
 				Alterar_pvenda(p, pvenda);
-				printf("O preço de venda foi atualizado de : %f", pvenda);
-				printf(" para : %f", novo_pvenda);
 			}
 		}
 
