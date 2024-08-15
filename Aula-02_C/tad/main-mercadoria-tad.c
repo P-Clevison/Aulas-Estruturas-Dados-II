@@ -10,7 +10,7 @@ int main() {
 
 	while (oper == 0)
 	{
-		printf("\n\nSelecione uma operacao para ser realizada: \n 1. Cadastrar mercadoria \n 2. Calcular preco de venda \n 3. Alterar preco de venda \n\n");
+		printf("\n\nSelecione uma operacao para ser realizada: \n 1. Cadastrar mercadoria \n 2. Calcular preco de venda \n 3. Alterar preco de venda \n\nDigite 4 para sair\n\n");
 		oper = -1;
 		scanf("%d", &oper);
 
@@ -41,22 +41,20 @@ int main() {
 				pvenda = Calcular_pvenda(p);
 				printf("O preco de venda sera: %1f", pvenda);
 			}
+			oper = 0;
 		}
 		if (oper == 3)
 		{
 			if (p !=NULL)
 			{
+				printf("Informe o novo valor de venda: ");
 				scanf("%f", &pvenda);
 				Alterar_pvenda(p, pvenda);
 			}
+			oper = 0;
 		}
 
 	}
-
-
-
-
-
 
 	return 0;
 }
