@@ -74,7 +74,7 @@ void merge_Sort(int vetor, int inicio, int fim) {
 }
 
 
-void merge_Metades(int vetor[], int inicio, int meio, int fim) {
+void merge_Metades(int v[], int inicio, int meio, int fim) {
 	int com1 = inicio, com2 = meio+1, comAux = 0, vetAux[sizeof(vetor)];
 	while (com1<=meio && com2<=fim) {
 		if (vetor[com1] <= vetor[com2]) {
