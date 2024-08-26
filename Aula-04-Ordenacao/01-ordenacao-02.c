@@ -5,7 +5,7 @@ int vetor[10], x, y;
 
 
 void listar_vetor(int v[]) { 
-	for  (x = 0; x < sizeof(v); x++) {
+	for  (x = 0; x < 10; x++) {
 		if (x < 9) {
 			printf(" %d, ", v[x]);
 		}
@@ -18,7 +18,7 @@ void listar_vetor(int v[]) {
 
 void bubble_Sort(int v[]) {
 	int i, j, aux;
-	for(i = sizeof(v)-1; i > 0; i--) {
+	for(i = 10-1; i > 0; i--) {
 		for(j = 0; j < i; j++) {
 			if(v[j] > v[j+1]) {
 				aux = v[j]; v[j] = v[j+1]; v[j+1] = aux; //troca
@@ -32,7 +32,7 @@ void bubble_Sort(int v[]) {
 
 void insertion_Sort(int v[]){
 	int i, j, x;
-	for(i = 1; i < sizeof(v); i++) {
+	for(i = 1; i < 10; i++) {
 		x = v[i];
 		j = i - 1;
 		while(j >= 0 && v[j] > x) {
@@ -48,9 +48,9 @@ void insertion_Sort(int v[]){
 
 void selection_Sort(int v[]){
     int i, j, aux, min;
-    for(i = 0; i < sizeof(v)-1; i++) {
+    for(i = 0; i < 10-1; i++) {
         min = i;
-        for(j = i+1; j < sizeof(v); j++) {
+        for(j = i+1; j < 10; j++) {
             if(v[j] < v[min]) {
                 min = j;
             }
@@ -75,7 +75,7 @@ void merge_Sort(int vetor, int inicio, int fim) {
 
 
 void merge_Metades(int v[], int inicio, int meio, int fim) {
-	int com1 = inicio, com2 = meio+1, comAux = 0, vetAux[sizeof(vetor)];
+	int com1 = inicio, com2 = meio+1, comAux = 0, vetAux[10];
 	while (com1<=meio && com2<=fim) {
 		if (vetor[com1] <= vetor[com2]) {
 			vetAux[comAux] = vetor[com1];
