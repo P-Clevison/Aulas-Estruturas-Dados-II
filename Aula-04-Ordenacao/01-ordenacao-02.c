@@ -99,6 +99,8 @@ void merge_Metades(int v[], int inicio, int meio, int fim) {
 	}
 }
 
+void quick_Sort(int v[], int inicio, int fim) {
+}
 
 void main() {
 	int oper;
@@ -126,11 +128,11 @@ void main() {
 		oper = 0;
 	}
 	if (oper == 4) {
-		merge_Sort(vetor, 0, sizeof(vetor));
+		merge_Sort(vetor, 0, 10);
 		oper = 0;
 	}
 	if (oper == 5) {
-		quick_Sort(vetor);
+		quick_Sort(vetor, 0, 10);
 		oper = 0;
 	}
 	printf("\n\nVetor Ordenado: ");
