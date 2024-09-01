@@ -1,38 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-int vetor[10], x, y;
+void fill_Random(int v[], int len, int max) {
+	for (int i = 0; i < len; i++) {
+		v[i] = (rand() % max) + 1;
+	}
+}
 
 
-void listar_vetor(int v[]) { 
-	for  (x = 0; x < 10; x++) {
-		if (x < 9) {
+void list_array(int v[], int len) { 
+	for (int x = 0; x < len; x++) {
+		if (x < len - 1) {
 			printf(" %d, ", v[x]);
-		}
-		if (x == 9) {
+		} else {
 			printf(" %d \n", v[x]);
 		}
 	}
 }
 
 
-void bubble_Sort(int v[]) {
+void bubble_Sort(int v[], int len) {
 	int i, j, aux;
-	for(i = 10-1; i > 0; i--) {
+	for(i = len-1; i > 0; i--) {
 		for(j = 0; j < i; j++) {
 			if(v[j] > v[j+1]) {
 				aux = v[j]; v[j] = v[j+1]; v[j+1] = aux; //troca
 			}
 		}
 		printf("Bubble Sort: ");
-		listar_vetor(v);
+		list_array(v, len);
 	}
 }
 
 
-void insertion_Sort(int v[]){
+void insertion_Sort(int v[], int len){
 	int i, j, x;
-	for(i = 1; i < 10; i++) {
+	for(i = 1; i < len; i++) {
 		x = v[i];
 		j = i - 1;
 		while(j >= 0 && v[j] > x) {
@@ -41,16 +45,16 @@ void insertion_Sort(int v[]){
 		}
 		v[j+1] = x;
 		printf("Insertion Sort: ");
-		listar_vetor(v);
+		list_array(v, len);
 	}
 }
 
 
-void selection_Sort(int v[]){
+void selection_Sort(int v[], int len){
     int i, j, aux, min;
-    for(i = 0; i < 10-1; i++) {
+    for(i = 0; i < len-1; i++) {
         min = i;
-        for(j = i+1; j < 10; j++) {
+        for(j = i+1; j < len; j++) {
             if(v[j] < v[min]) {
                 min = j;
             }
@@ -59,83 +63,116 @@ void selection_Sort(int v[]){
 			aux = v[i]; v[i] = v[min]; v[min] = aux; //troca
 		} else
 		printf("Selection Sort: ");
-		listar_vetor(v);
+		list_array(v, len);
     }
 }
 
 
-void merge_Sort(int vetor, int inicio, int fim) {
-	if (inicio < fim) {
-		int meio = (inicio+fim)/2;
-		mergeSort(vetor, inicio, meio);
-		mergeSort(vetor, meio+1, fim);
-		merge_Metades(vetor, inicio, meio, fim);
-	}
-}
-
-
-void merge_Metades(int v[], int inicio, int meio, int fim) {
-	int com1 = inicio, com2 = meio+1, comAux = 0, vetAux[10];
-	while (com1<=meio && com2<=fim) {
-		if (vetor[com1] <= vetor[com2]) {
-			vetAux[comAux] = vetor[com1];
+void merge_Halfs(int v[], int begin, int midd, int end) {
+	int com1 = begin, com2 = midd + 1, comAux = 0;
+    int *vetAux = (int *)malloc((end - begin + 1) * sizeof(int));
+	while (com1 <= midd && com2 <= end) {
+		if (v[com1] <= v[com2]) {
+			vetAux[comAux] = v[com1];
 			com1++;
 		} else {
-			vetAux[comAux] = vetor[com2];
+			vetAux[comAux] = v[com2];
 			com2++;
 		}
 		comAux++;
 	}
-	while (com1<=meio) { //Caso ainda haja elementos na primeira metade
-		vetAux[comAux] = vetor[com1];
-		comAux++;com1++;
+	while (com1 <= midd) { // Caso ainda haja elementos na primeira metade
+		vetAux[comAux] = v[com1];
+		comAux++;
+		com1++;
 	}
-	while (com2<=fim) { //Caso ainda haja elementos na segunda metade
-		vetAux[comAux] = vetor[com2];
-		comAux++;com2++;
+	while (com2 <= end) { // Caso ainda haja elementos na segunda metade
+		vetAux[comAux] = v[com2];
+		comAux++;
+		com2++;
 	}
-	for (comAux=inicio; comAux<=fim; comAux++) { //Move os elementos de volta para o vetor original
-		vetor[comAux] = vetAux[comAux-inicio];
+	for (comAux = begin; comAux <= end; comAux++) { // Move os elementos de volta para o vetor original
+		v[comAux] = vetAux[comAux - begin];
 	}
+    free(vetAux);
 }
 
-void quick_Sort(int v[], int inicio, int fim) {
+
+void merge_Sort(int v[], int begin, int end) {
+	if (begin < end) {
+		int midd = (begin + end) / 2;
+		merge_Sort(v, begin, midd);		
+		merge_Sort(v, midd + 1, end);
+		merge_Halfs(v, begin, midd, end);
+	}
+	printf("\nMerge Sort: ");
+	list_array(v, end);
 }
+
+
+int partition(int v[], int begin, int end) {
+    int pivot = v[end];
+    int i = (begin - 1);
+    for (int j = begin; j <= end - 1; j++) {
+        if (v[j] < pivot) {
+            i++;
+            int temp = v[i];
+            v[i] = v[j];
+            v[j] = temp;
+        }
+    }
+    int temp = v[i + 1];
+    v[i + 1] = v[end];
+    v[end] = temp;
+    return (i + 1);
+}
+
+
+void quick_Sort(int v[], int begin, int end) {
+    if (begin < end) {
+        int pi = partition(v, begin, end);
+        quick_Sort(v, begin, pi - 1);
+        quick_Sort(v, pi + 1, end);
+    }
+	printf("\nQuick Sort: ");
+	list_array(v, end);
+}
+
 
 void main() {
-	int oper;
-	// Carregar vetor
-	y = 10;
-	printf("Vetor: ");
-	for  (x = 0; x < 10; x++) {
-		vetor[x] = y;
-		y--;
-		printf(" %d, ", vetor[x]);	
-	}
+	int oper = 0;
+	int lenght = 10;
+	int array[10];
+	srand(time(NULL));
+	fill_Random(array, lenght, lenght * 2);
+	list_array(array, lenght);
 	
-	printf("\nSelecione a opcao desejada:\n1. Bubble sort \n2. Insertion Sort \n3. Selection Sort\n4. Merge Sort\n5. Quick Sort\n\n");
-	scanf("%d", &oper);
-	if (oper == 1) {
-		bubble_Sort(vetor);
-		oper = 0;
+	while (oper == 0) {
+		printf("\nSelecione a opcao desejada:\n1. Bubble sort \n2. Insertion Sort \n3. Selection Sort\n4. Merge Sort\n5. Quick Sort\n\n6. Preencher vetor\n\n");
+		scanf("%d", &oper);
+		if (oper == 1) {
+			bubble_Sort(array, lenght);
+			oper = 0;
+		}
+		if (oper == 2) {
+			insertion_Sort(array, lenght);
+			oper = 0;
+		}
+		if (oper == 3) {
+			selection_Sort(array, lenght);
+			oper = 0;
+		}
+		if (oper == 4) {
+			merge_Sort(array, 0, lenght - 1);
+			oper = 0;
+		}
+		if (oper == 5) {
+			quick_Sort(array, 0, lenght - 1);
+			oper = 0;
+		}
+		if (oper == 6) {
+			fill_Random(array, lenght, lenght * 2);
+			oper = 0;
+		}
 	}
-	if (oper == 2) {
-		insertion_Sort(vetor);
-		oper = 0;
-	}
-	if (oper == 3) {
-		selection_Sort(vetor);
-		oper = 0;
-	}
-	if (oper == 4) {
-		merge_Sort(vetor, 0, 10);
-		oper = 0;
-	}
-	if (oper == 5) {
-		quick_Sort(vetor, 0, 10);
-		oper = 0;
-	}
-	printf("\n\nVetor Ordenado: ");
-	listar_vetor(vetor);
-	
-}	
+}
