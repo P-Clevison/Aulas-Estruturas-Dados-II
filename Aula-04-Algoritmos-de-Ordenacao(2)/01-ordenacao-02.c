@@ -148,7 +148,7 @@ void main() {
 	list_array(array, lenght);
 	
 	while (oper == 0) {
-		printf("\nSelecione a opcao desejada:\n1. Bubble sort \n2. Insertion Sort \n3. Selection Sort\n4. Merge Sort\n5. Quick Sort\n\n6. Preencher vetor\n\n");
+		printf("\nSelecione a opcao desejada:\n1. Bubble sort \n2. Insertion Sort \n3. Selection Sort\n4. Merge Sort\n5. Quick Sort\n\n6. Recarregar vetor\n\n");
 		scanf("%d", &oper);
 		if (oper == 1) {
 			bubble_Sort(array, lenght);
