@@ -61,7 +61,7 @@ void selection_Sort(int v[], int len){
         }
 		if (v[min] != v[i]) {
 			aux = v[i]; v[i] = v[min]; v[min] = aux; //troca
-		} else
+		}
 		printf("Selection Sort: ");
 		list_array(v, len);
     }
@@ -105,8 +105,8 @@ void merge_Sort(int v[], int begin, int end) {
 		merge_Sort(v, midd + 1, end);
 		merge_Halfs(v, begin, midd, end);
 	}
-	printf("\nMerge Sort: ");
-	list_array(v, end);
+	printf("Merge Sort: ");
+	list_array(v, end + 1);
 }
 
 
@@ -134,8 +134,8 @@ void quick_Sort(int v[], int begin, int end) {
         quick_Sort(v, begin, pi - 1);
         quick_Sort(v, pi + 1, end);
     }
-	printf("\nQuick Sort: ");
-	list_array(v, end);
+	printf("Quick Sort: ");
+	list_array(v, end + 1);
 }
 
 
@@ -144,7 +144,7 @@ void main() {
 	int lenght = 10;
 	int array[10];
 	srand(time(NULL));
-	fill_Random(array, lenght, lenght * 2);
+	fill_Random(array, lenght, lenght * 5);
 	list_array(array, lenght);
 	
 	while (oper == 0) {
@@ -172,6 +172,7 @@ void main() {
 		}
 		if (oper == 6) {
 			fill_Random(array, lenght, lenght * 2);
+			list_array(array, lenght);
 			oper = 0;
 		}
 	}
