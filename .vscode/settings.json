@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "stdlib.h": "c",
-        "04a-mercadoria.h": "c"
+        "04a-mercadoria.h": "c",
+        "arvore.h": "c",
+        "stdio.h": "c"
     }
 }
